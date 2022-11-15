@@ -1,0 +1,46 @@
+{% extends 'admin/adminlayout.html.twig' %}
+
+{% block title %} Gestion des tags {% endblock %}
+
+{% block admin_body %}
+    
+    <table class="uk-table uk-table-striped">
+        <h1 class="sujet"> Gestion des tags </h1>
+        
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="uk-button uk-button-primary" href="{{path('tag_new') }}"> Ajouter un tag</a> 
+            {% endif %}
+        <br>
+
+        <span class="uk-badge"> Il y a {{ tags| length}} tags </span> 
+        
+        
+        <table class="uk-table uk-table-striped">
+        <thead>
+            <tr>
+                <th> Nom du tag</th>
+                <th> Nombre de sujets </th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th> Actions </th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for tag in tags %}
+            <tr>
+         
+                <td> <a class="black-color" href=" {{ path('sujet', {'slug':tag.slug}) }}"> {{ tag.nomTag }} </a></td>
+                <td> {{tag.sujets| length }}  </td>
+                <td>
+                    {% if app.user %}           
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="black-color"  href="{{ path('tag_delete', {'id':tag.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce tag?'))"> <i class="fas fa-trash-alt"></i></a> 
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    {% endblock %}

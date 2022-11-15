@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sujets !{% endblock %}
+
+{% block body %}
+    <div class="uk-container">
+        <h1 class="titresujet"> Liste des sujets </h1>
+        {% if app.user %}
+            <a class="uk-button uk-button-primary" href=" {{path('sujet_new') }}"> Ajouter un sujet</a> 
+            <br> <br>
+        {% endif %}
+        <span class="uk-badge"> Il y a {{ sujets| length}} sujet(s) </span> <!-- | sert à ajouter des options-->
+    
+    <div class="list-tag"> 
+        <table class="listes">
+        
+            <thead class="membre">
+                <tr> 
+                    <th> Sujet</th>
+                    <th> Auteur </th>
+                    <th> Post(s) </th>
+                    <th> Date de création </th>
+                    {% if is_granted('ROLE_MODO') %}
+                        <th> Actions </th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for sujet in sujets %}
+                <tr {{ sujet.resolved ? "style='background: #39FF33'" : ""}}>
+            
+                    <td> <a class="black-color" href="{{path("sujet_show", {'slug': sujet.slug}) }}"> {{ sujet.titre }} </a></td>
+                    <td> <a class="black-color" href="{{path('user_show', {'id': sujet.author.id}) }}"> {{sujet.author}}  </a> </td>
+                    <td> {{sujet.messages| length }}  </td>
+                    <td>  {{sujet.creationDate | date("d-m-Y à H:i:s")}}  </td>
+                    {% if is_granted('ROLE_MODO') %}
+                    <td>
+                        <a class="black-color" href="{{ path('sujet_lock', {id:sujet.id}) }}"> 
+                            {{sujet.locked ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-lock-open"></i>'}} 
+                        </a>   
+                        
+                        {% endif %}
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+{% endblock %}

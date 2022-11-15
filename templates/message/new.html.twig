@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajout d'un commentaire {% endblock %}
+
+{% block body %}
+   <div class="uk-container">      
+    {% if app.user %}
+        <h1 style="margin-top:200px; margin-bottom:100px;"> Ajout d'un commentaire </h1>
+        {{form(newMessage)}}
+        <p style="margin-bottom:200px;"> <p>
+
+    {% else %}
+        <div class="uk-animation-toggle" tabindex="0">
+            <div class="uk-card uk-card-default uk-card-body uk-animation-shake">
+                <p class="uk-text-center">Veuillez vous connecter pour poster un commentaire ! </p>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

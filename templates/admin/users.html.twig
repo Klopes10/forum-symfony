@@ -1,0 +1,50 @@
+{% extends 'admin/adminlayout.html.twig' %}
+
+{% block title %} Gestion des utilisateurs {% endblock %}
+
+{% block admin_body %}
+    <h1 class="sujet"> Gestion des utilisateurs </h1>
+
+    <span class="uk-badge"> Il y a {{ users| length}} membres </span>
+
+    <table class="uk-table uk-table-striped">
+        <thead>
+            <th> Pseudo </th>
+            <th> Email </th>
+            <th> Sujet </th>
+            <th> Message </th>
+            <th> Roles </th>
+            <th> Actions </th>
+        </thead>
+        <tbody>
+            {# On boucle sur les utilisateurs #}
+            {% for user in users %}
+                <tr>
+                    <td>{{user.pseudo}} </td>
+                    <td>{{user.email}} </td>
+                    <td>{{user.sujets|length}} </td>
+                    <td>{{user.messages|length}} </td>
+                    <td> 
+                        {% for role in user.roles %}
+                            {% if role == "ROLE_USER" %}
+                                Membre
+                            {% elseif role == "ROLE_MODO" %}
+                                Modérateur
+                            {% elseif role == "ROLE_ADMIN" %}
+                                Administateur
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a class="black-color" href="{{ path('modifier_utilisateur', {'id' : user.id}) }}" > <i class="fas fa-edit"></i></a>
+                        <a class="black-color" href="{{ path('delete_utilisateur', {'id': user.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce membre ?'))"> <i class="fas fa-trash-alt"></i></a> 
+                    </td>
+                
+            {% else %}
+                <tr>
+                    <td colspan=4> Il n'y a pas d'utilisateur inscrit</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

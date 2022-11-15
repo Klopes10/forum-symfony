@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        
+        <title>{% block title %}Welcome {% endblock %}</title>
+        {% block stylesheets %}
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.8/dist/css/uikit.min.css" />
+        <link rel="stylesheet" href="{{asset('style.css')}}">
+        <script src="https://kit.fontawesome.com/4b7f769781.js" crossorigin="anonymous"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <a ref="#" id='logo'> </a>
+            <div id="hamburger">
+                <div id="hamburger-content">
+                    <nav>
+                        <ul class ="navhome">
+                            <li><a href="{{ path('home') }}">Accueil </a></li>
+                            {% if app.user %}
+                                {% if is_granted('ROLE_ADMIN')%}
+                                    <li> <a href=" {{path('utilisateurs')}}"> Administration </a></li>
+                                {% endif %}
+
+                                <li><a href=" {{ path("tag") }}"> Les Tags </a></li>
+                                <li><a href=" {{path("user") }}"> Liste des membres </a></li>
+                                <li><label for="site-search"></label>
+                                    <input type="search" id="site-search" name="q"
+                                        aria-label="Search through site content">
+
+                                    <button class="search">Rechercher</button></li>
+                                    <span class ="connexion"> Bienvenue {{ app.user.pseudo }}</span>
+                                <li> <a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                            {% else %}
+                                <li> <a href=" {{ path("tag") }}"> Les Tags </a></li>
+                                <li><a href=" {{path("user") }}"> Liste des membres </a></li>
+                        
+                                <li><label for="site-search"></label>
+                                    <input type="search" id="site-search" name="q"
+                                        aria-label="Search through site content">
+
+                                    <button class="search">Rechercher</button></li>
+                                <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                                <li><a href="{{ path('app_register') }}">Inscription</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                <button id="hamburger-button">&#9776; </button>
+                <div id="hamburger-sidebar">    
+                    <div id="hamburger-sidebar-header"> </div>
+                    <div id="hamburger-sidebar-body"> </div>
+                </div> 
+                <div id="hamburger-overlay"></div>
+            </div>
+        </header>
+
+                    
+        {% block body %}
+        
+        {% endblock %}
+                   
+        
+        {% block javascripts %}
+            <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+            <script>
+
+                tinymce.init({
+                    selector: 'textarea'
+                });
+
+            </script>
+            <script>
+                var content = document.querySelector('#hamburger-content');
+                var sidebarBody = document.querySelector('#hamburger-sidebar-body');
+                var button = document.querySelector('#hamburger-button');
+                var overlay = document.querySelector('#hamburger-overlay');
+                var activatedClass = 'hamburger-activated';
+
+                sidebarBody.innerHTML = content.innerHTML;
+
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    this.parentNode.classList.add(activatedClass);
+                });
+
+                button.addEventListener('keydown', function(e){
+                    if (this.parentNode.classList.contains(activatedClass))
+                    {
+                        if(e.repeat === false && e.which === 27)
+                            this.parentNode.classList.remove(activatedClass);
+                    }
+                });
+
+            overlay.addEventListener('click', function(e){
+                e.preventDefault();
+
+                this.parentNode.classList.remove(activatedClass);
+            });
+
+            </script>
+        
+        {% endblock %}
+        <footer> 
+                   
+            <p class ="copyright">
+                <strong> by Kevin Lopes @2021  </strong>
+            </p>
+            
+    
+        </footer>
+    </body>
+</html>

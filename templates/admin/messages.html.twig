@@ -1,0 +1,52 @@
+{% extends 'admin/adminlayout.html.twig' %}
+
+{% block title %}{{ sujet }} !{% endblock %}
+
+{% block body %}
+<div class="uk-container">
+    <!--<br> <a class="sujindex" href=" {{ path("sujet") }}"> Liste des sujets</a><br> -->
+
+    <h1 class="titresujet"> {{ sujet }} </h1>
+    
+
+    <div>
+        <span class="uk-badge">Crée le : {{sujet.creationDate| date('d-m-Y')}} <br></span>
+
+        <span class="uk-badge">Nombre de messages: {{sujet.messages | length}}</span>
+    </div>
+    
+    <table class="uk-table uk-table-striped">
+        <thead>
+            <tr>
+                
+                <th> Membre</th>
+                <th> Message </th>
+                <th>{% if app.user %} Actions{% endif %}</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in sujet.messages %}
+            <tr>   
+
+                <td>
+                    <a class="black-color" href="{{path('user_show', {'id':message.author.id}) }}"> {{message.author}} </a> <br>
+                Envoyé le :{{message.creationDate | date('d-m-Y à H:i:s')}} <br>
+                Message(s):{{message.author.messages | length}} -- Sujet(s): {{message.author.sujets | length}} 
+                </td>
+                <td>  {{message.texte}} </td>
+                <td>{% if app.user == message.author or is_granted("ROLE_MODO") %}
+                        <a class="black-color" href=" {{path('message_edit', {'id':message.id}) }}"> <i class="fas fa-edit"></i> </a>                     
+                        <a class="black-color" href="{{ path('message_delete', {'id':message.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire?'))"><i class="fas fa-trash-alt"></i></a>
+                    {% endif %}
+                </td>
+            </tr>   
+            {% else %}
+                 <tr>
+                    <td colspan=3> Il n'y a pas de commentaire...</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ sujet }} !{% endblock %}
+ 
+{% block body %}
+ <div class="uk-container">
+    <!--<br> <a class="sujindex" href=" {{ path("sujet") }}"> Liste des sujets</a><br> -->
+
+    <h1 class="sujet"> {{ sujet }} </h1>
+        <p class="resolu">
+        {% if app.user == sujet.author and sujet.resolved == false and sujet.locked == false %}
+            <a class="uk-button uk-button-secondary" href="{{ path("sujet_resolve", {'id': sujet.id}) }}" > Marquer comme résolu</a> 
+        {% elseif sujet.resolved %}
+            Sujet résolu <i class="fas fa-check" style="color: green"></i>
+        {% endif %}
+        </p>
+    <!--<div> 
+        {% if app.user and  sujet.locked == false and sujet.resolved == false %}
+            <a class="sujindex" href=" {{path('message_new', {'slug':sujet.slug}) }}"> Ajouter un commentaire </a> 
+        {% endif %}
+    </div>-->
+    <br>
+
+    <div>
+        <span class="uk-badge">Crée le : {{sujet.creationDate| date('d-m-Y')}} <br></span>
+
+        <span class="uk-badge">Nombre de messages: {{sujet.messages | length}}</span>
+
+        <span class="uk-badge">Crée par : {{sujet.author}}</span>
+    </div>
+    
+    <table class="discussion">
+        <thead>
+            <tr class="head">
+                <th> Ecrit par </th>
+                <th> Message </th>
+                {% if app.user %}<th> <!--Actions--></th> {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in sujet.messages %}
+                
+            <tr>   
+                <td>
+                    <a class="black-color" href="{{path('user_show', {'id':message.author.id}) }}"> {{message.author}}   </a> <br>
+                   
+                    {{message.creationDate | date('d-m-Y à H:i:s')}} <br>
+                    Message(s):{{message.author.messages | length}} -- Sujet(s): {{message.author.sujets | length}} 
+                </td>
+                <td style="width:1000px;">  {{message.texte | raw }} </td>
+                {% if app.user == message.author or is_granted("ROLE_MODO") %}
+                        {% if sujet.locked == false or sujet.resolved == false %} 
+                        <td>
+                            <a class="black-color" href=" {{path('message_edit', {'id':message.id}) }}"> <i class="fas fa-edit"></i> </a>                     
+                            <a class="black-color" href="{{ path('message_delete', {'id':message.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire?'))"><i class="fas fa-trash-alt"></i></a>
+                        {% else %}
+                        
+                        {% endif %}    
+                </td>
+                {% endif %}
+            </tr>   
+            {% else %}
+                 <tr>
+                    <td colspan=3> Il n'y a pas de commentaire...</td>
+                </tr>
+                
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if app.user and  sujet.locked == false and sujet.resolved == false %}
+        {% if app.user  %}
+            <h1 class="sujet"> Ajout d'un commentaire </h1>
+            {{form(newMessage)}}
+
+        {% else %}
+            <div class="uk-animation-toggle" tabindex="0">
+                <div class="uk-card uk-card-default uk-card-body uk-animation-shake">
+                    <p class="uk-text-center">Veuillez vous connecter pour poster un commentaire ! </p>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+    {% endif %}
+
+</div>
+{% endblock %}

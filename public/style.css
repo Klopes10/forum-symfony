@@ -1,0 +1,571 @@
+*{
+    box-sizing: border-box;
+}
+/*-----------------------------Page Home-----------------------------*/
+body {
+
+    background: url('img/fond.jpg') no-repeat top right;
+    background-size: cover;
+
+   
+}
+html{
+    color: black;
+}
+/*************************************Menu****************************/
+#site-search{
+    height:25px;
+}
+.search {
+    height:25px;
+    border-radius: 8px;
+    
+}
+
+#hamburger, #hamburger-content{
+    display:inline;
+}
+
+#hamburger-button{
+    display:none;
+    cursor:pointer;
+    background: none;
+    border:none;
+    font-size:30px;
+    padding:0;
+    vertical-align: top;
+    line-height: 47px;
+    float:right;
+    margin-right:32px;
+    color:white;
+    padding-top:1em;
+}
+#hamburger-overlay{
+    display:none;
+    position:fixed;
+    z-index: 10;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    
+    
+}
+
+#hamburger-sidebar{
+    display:none;
+    position:fixed;
+    width:84%;
+    z-index:20;
+    height:100%;
+    top:0;
+    left:0;
+    background-color: #004365;
+    transform:translateX(-100%);
+    transition: all .2s ease-out;
+}
+
+#hamburger-sidebar ul{
+    display:inline-block;
+}
+
+#hamburger-sidebar-header{
+    background-color:#004365 ;
+    background-size: cover;
+    height:128px;
+}
+
+#hamburger-sidebar-body{
+    padding: 16px 8px;
+}
+
+#hamburger-sidebar-body li{
+    font-size: x-large;
+    margin:1em;
+}
+
+#hamburger-sidebar-body span.connexion{
+    font-size: x-large;
+    padding-left:2em;
+}
+
+#hamburger-sidebar-body li:before {
+    content:' ';
+    display:inline-block;
+    vertical-align: middle;
+    width:24px;
+    height:24px;
+    
+    margin-right:16px;
+    margin-bottom: 4px;
+}
+
+
+nav {
+    color: black;
+    padding : 16px;
+    margin :0;
+    padding-bottom: 2em;
+    width:100% ;
+    flex:2;
+    background-color:#004365;
+
+}
+
+nav ul.navhome {
+    list-style-type: none;
+    font-weight :bold;
+    margin: auto;
+    display: flex; 
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 0;
+    flex:2;
+    width:100%;
+    justify-content: space-around;
+    margin-top: 1em;
+}
+.uk-link, a {
+    color: white;
+}
+
+li.a{
+    color: white;
+}
+
+.connexion {
+    color:white;
+}
+a:active {
+    
+    color: white;
+  }
+
+
+/************************** WRAPPER*******************/
+.example-wrapper {
+    background: transparent url('img/banner01.jpg') no-repeat center center;
+    background-size: cover;
+    height: 500px;
+    width: 1200px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1.bienvenue {
+    color:white ;
+    text-align:center;
+    padding-top: 5em;
+    padding-bottom: 1em;
+}
+/*********************** Titre du tag*******************/
+.tagphp {    
+    border: 1px solid rgba(0,0,0,0.8);
+    
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px;
+    width:1200;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    color: white;
+    background-color: #004365;
+}
+
+/************************** Tableau des tags *****************/
+
+table.home{
+    background-color:white ;
+    width: 100%;
+    text-align: center;
+}
+td.nomsujet{
+    float:left;
+  
+    width: 100%;
+}
+
+
+td{
+    
+    width:300px;
+    height:100px;
+    text-align: center;
+    list-style-type: disc;
+
+}
+
+th {
+    font-size: large;
+    height: 50px;
+
+}
+ 
+
+.list-tag{
+    border: solid grey 2px;
+    margin: 2em 0;
+    
+}
+
+.uk-container>:last-child.list-tag{
+    margin-bottom:80px;
+}
+
+
+/*------------------------------------------PAGE INDEX SUJET---------------------------*/
+.sujindex{
+    color:white;
+}
+
+.titresujet{
+    color:black;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    text-align:center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+
+/*********************************************** PAGE SUJET**************************/
+
+h1.sujet{
+    color:black;
+    padding-top:2em;
+    padding-bottom:1em;
+    text-align:center;
+}
+table.discussion{
+    background-color: white;
+    width: 100%;
+    margin-top:50px;
+    border-collapse: collapse;
+}
+.discussion td{
+    border: solid grey 2px;
+    margin-bottom: 10px;
+    
+}
+
+.discussion tr.head{
+    background-color:#004365;
+    margin-bottom: 10px;
+    color: white;
+    height:60px;
+    border: solid grey 2px;
+    
+}
+
+p.resolu{
+    color: green;
+    font-size: large;
+    font-weight: bold;
+    float: right;
+}
+
+.uk-button,.uk-button-secondary{
+    background-color: #004365;
+    border-radius: 8px; 
+    float: right;
+}
+
+
+
+/*********************************************** PAGE tag**************************/
+
+a.uk-button.uk-button-primary{
+    float:right;
+}
+
+/**************************************FORMULAIRE ********************************/
+
+.uk-margin-top{
+    margin-top: 0px!important ;
+    border:white solid 2px;
+}
+
+
+
+/******************************************* PARTIE ADMIN **********************************/
+
+#admin_container {
+    display: flex;
+}
+
+#admin_container>nav {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+#admin_container>div {
+    flex:4;
+}
+
+.uk-table{
+    background-color:white;
+}
+
+.black-color{
+    color: black;
+    font-size: large;
+    
+    
+}
+.white-color{
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    
+}
+
+.white-titre{
+    color:white;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    text-align:center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+a.menu-admin{
+    margin-left:50px;
+}
+
+.uk-container>:last-child {
+    margin-bottom:50px;
+}
+
+/******************************************* PARTIE Login **********************************/
+#login-body {
+	max-width: 450px;
+	margin: auto;
+	background-color:#004365;
+	color: white;
+	border-radius: 5px;
+	padding: 50px;
+	margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+input[type="email"], input[type="password"], input[type="text"]{
+	padding: 15px;
+	width: 100%;
+	font-size: 1em;
+	border: 0;
+	border-radius: 5px;
+	color: black;
+	background-color: white;
+	margin-bottom: 15px;
+}
+h1.h3.mb-3.font-weight-normal{
+    color: white;
+    text-align: center;
+}
+.button {
+	background-color: #E50914;
+	color: white;
+	padding: 15px;
+	width: 100%;
+	font-size: 1em;
+	font-weight: bold;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+}
+
+.btn,.btn-lg.btn-primary {
+    justify-content: center;
+}
+/******************************************* PARTIE Register **********************************/
+#login-body2 {
+	max-width: 450px;
+	margin: auto;
+	background-color:#004365;
+	color: white;
+	border-radius: 5px;
+	padding: 50px;
+	margin-top: 200px;
+    margin-bottom: 220px;
+}
+
+h1.register{
+    color: white;
+    text-align: center;}
+
+
+
+/******************************************** Page Liste des membres ***********************/
+
+table.listes{
+    background-color:white ;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.8);
+    }
+.titremembre { 
+    border: 1px solid rgba(0,0,0,0.8);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px;
+    width:1200;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    color: white;
+    background-color: #004365;}
+
+thead.membre {
+
+    background-color:#004365;
+    margin-bottom: 10px;
+    color: white;
+    height:60px;
+    border: solid grey 2px;
+    
+}
+
+th.titremembre{
+    font-size: x-large;
+    height: 100px; 
+    float:left;
+    padding-top: 25px;
+}
+
+td{
+    width:300px;
+}
+
+
+
+/******************************************** FOOTER **************************************/
+
+footer{
+    background-color: #004365;
+    display:flex;
+    width:100%;
+    padding-top : 32px;
+    padding-bottom: 32px
+    /*margin-top:4em;*/
+   
+    
+}
+
+
+/************** Copyright texte *************/
+
+.copyright{
+    color: white;
+    flex: 3;
+    text-align: center;
+    margin-top: 25px ;
+    
+}
+
+
+
+
+
+/*************************************RESPONSIVE**************************/
+
+@media all and (max-width: 1200px) {
+    #header {
+        width:100%;
+         
+     }
+    ul.navhome{
+        font-size:large;
+    }
+ /*menu*/
+     nav {
+         width:100%;
+         margin:1em;
+         padding-left: 0px;
+         margin-left:0px;
+         font-size: 12px;
+        
+    }
+
+    .header__icon{
+        display:block;
+        width:50px;
+        height:50px;
+        background-color: white;
+    }
+
+
+ /*BANNIERE*/
+ .example-wrapper {
+         width:100%;
+         background-size: cover;
+         
+     }
+
+    h1.bienvenue{
+        
+        color:white ;
+        text-align:center;
+        padding-top: 5em;
+        padding-bottom: 1em;
+        }
+ 
+        
+
+        nav a:hover, nav a:focus {background-color: rgba(255,255,255,.10);}
+    
+        nav{
+            display:flex;
+            flex-direction: row;
+            
+            text-align: center;
+            margin-right: 2em;
+            margin:0;}
+
+    table.home th{
+
+        width: 300px;
+    }
+
+}
+
+@media all and (max-width: 1050px) {
+
+    #hamburger-content{
+        display:none;
+    }
+    
+    #hamburger-button, #hamburger-sidebar,
+    .hamburger-activated #hamburger-overlay{
+        display:inline-block;
+    }
+    .hamburger-activated #hamburger-sidebar{
+        transform: translateX(0);
+    }
+
+  #admin_container{
+      display:initial;
+  }
+  a.menu-admin{
+      font-size:20px;
+  }
+  .black-color{
+      font-size:20px;
+  }
+
+}
+
+@media all and (max-width: 500px) {
+
+    table {
+        font-size:xx-large;
+    }
+
+    
+}

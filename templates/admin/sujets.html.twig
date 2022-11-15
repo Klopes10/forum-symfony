@@ -1,0 +1,55 @@
+{% extends 'admin/adminlayout.html.twig' %}
+
+{% block title %} Gestion des sujets {% endblock %}
+
+
+{% block admin_body %}
+
+    <h1 class="sujet"> Gestion des sujets </h1>
+    {% if app.user %}
+        <a class="uk-button uk-button-primary" href=" {{path('sujet_new') }}"> Ajouter un sujet</a> 
+        <br> <br>
+    {% endif %} 
+    <span class="uk-badge"> Il y a {{ sujets| length}} sujet(s) </span> <!-- | sert à ajouter des options-->
+    
+    <table class="uk-table uk-table-striped">
+        <thead>
+            <tr>
+                
+                <th> Sujet</th>
+                <th> Auteur </th>
+                <th> Post(s) </th>
+                <th> Tag </th>
+                <th> Date de création </th>
+                {% if is_granted('ROLE_MODO') %}
+                    <th> Actions </th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for sujet in sujets %}
+            <tr>
+         
+                <td> <a class="black-color" href="{{path("sujets", {'slug': sujet.slug}) }}"> {{ sujet.titre }} </a></td>
+                <td> <a class="black-color" href="{{path('user_show', {'id': sujet.author.id}) }}"> {{sujet.author}} </a> </td>
+                <td> {{sujet.messages| length }}  </td>
+                <td> {{sujet.tag.nomTag}}
+                <td>  {{sujet.creationDate | date("d-m-Y à H:i:s")}}  </td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                        <a class="black-color" href="{{ path('sujet_lock', {id:sujet.id}) }}"> 
+                            {{sujet.locked ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-lock-open"></i>'}} 
+                        </a>   
+                      
+                    {% endif %}
+
+                    <a class="black-color" href="{{path("messages", {'slug': sujet.slug}) }}"> / Voir les messages </a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

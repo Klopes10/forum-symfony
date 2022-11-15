@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tags{% endblock %}
+  
+{% block body %}
+<div class="uk-container">
+    <h1 class="titresujet"> Liste des tags </h1>
+        <div class="ajout-tag">
+            <span class="uk-badge"> Il y a {{ tags| length}} tag(s) </span> 
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="uk-button uk-button-primary" href="{{path('tag_new') }}"> Ajouter un tag</a>
+            {% endif %}
+        </div>
+
+        <div class="list-tag"> 
+            <table class="listes">
+                <thead class="membre">
+                    <tr>
+                        <th style="height: 50px"> Nom du tag</th> 
+                        <th style="height: 50px"> Nombre de sujets </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tag in tags %}
+                    <tr>
+                
+                        <td style="height: 100px; text-align:center;"> <a class="black-color" href=" {{ path('sujet', {'slug':tag.slug}) }}">  {{ tag.nomTag }} </a></td>
+                        <td style="height: 100px; text-align:center;"> <strong>{{tag.sujets| length }} </strong>  </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Créér ton topic ! {% endblock %}
+
+{% block body %}
+<div class="uk-container">
+    <div id="login-body2">
+    
+    <h1 class="white-titre"> Créér un tag </h1>
+    
+        {% if app.user %}
+            {{ form(addTag) }}
+        {% else %}
+    <div class="uk-animation-toggle" tabindex="0">
+        <div class="uk-card uk-card-default uk-card-body uk-animation-shake">
+            <p class="uk-text-center">Veuillez vous connecter pour poster créer ! </p>
+        </div>
+    </div>
+
+{% endif %}
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des membres !{% endblock %}
+
+{% block body %}
+<div class="uk-container">
+    <h1 class="titresujet"> Liste des membres </h1>
+    
+    <p class="uk-badge"> Il y a {{ users| length}} membre(s) </p> <!-- | sert à ajouter des options-->
+
+    <div class="list-tag"> 
+        <h2 class="titremembre"> Les membres </h2>
+        <table class="listes">
+            <thead class="membre">
+
+            </thead>
+        <tbody>
+            {% for user in users %}
+                 
+                <tr>
+                    <td style="height: 100px"> <a class="black-color" href="{{path("user_show", {'id':user.id}) }}">  <strong> {{user.pseudo}} </strong> </a> <br/> Grade : {{ user.grade }} <br/> </td> 
+                    <td style="height: 100px"> <a class="black-color" href="{{path("user_show", {'id':user.id}) }}">  voir le profil  </a> <br/>    
+                
+                </tr>
+                
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+
+
+</div>
+{% endblock %}

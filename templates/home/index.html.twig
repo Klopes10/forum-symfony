@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Forum Entraide {% endblock %}
+ 
+{% block body %}
+ 
+<div class="example-wrapper"> 
+    <h1 class="bienvenue"> Bienvenue sur le Forum </h1>
+</div>
+ <div class="uk-container">
+
+<section> 
+
+    {% for tws in tagswithsujets %}
+
+        <div class="list-tag"> 
+            <h2 class="tagphp"> {{( tws['tag'])}} </h2>
+        
+
+            <table class="home">
+            <thead>
+                <tr style="height: 100px">               
+                    <th> Nom du sujet </th>
+                    <th> Auteur </th>
+                    <th> Création du sujet </th> 
+                    <th> Nombre de message </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            
+            {% for sujet in tws['sujets'] %}
+                
+                <tr>
+                    <td class="nomsujet" style=" padding-top:35px"><a class="black-color" href="{{path("sujet_show", {'slug': sujet.slug}) }}">{{ sujet }} </a></td>
+                    <td ><a class="black-color" href="{{path('user_show', {'id': sujet.author.id}) }}"> {{sujet.author}}  </a> </td>
+                    <td > {{sujet.creationDate | date("d-m-Y à H:i:s")}} </td>
+                    <td > {{sujet.messages| length }}  </td> 
+                             
+                </tr>
+
+            {% endfor %}
+            </tbody>
+
+            </table>
+            
+        </div>
+    {% endfor %}
+
+
+</section>
+
+
+</div>
+{% endblock %}
+
